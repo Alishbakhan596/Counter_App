@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_app/OnBoardScreen/onboard_screen2.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class Screen1 extends StatefulWidget {
   const Screen1({super.key});
@@ -10,6 +11,7 @@ class Screen1 extends StatefulWidget {
 }
 
 class _Screen1State extends State<Screen1> {
+  final controller = PageController();
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -25,8 +27,18 @@ class _Screen1State extends State<Screen1> {
                   // OnBoarding Screen #1
                   Stack(
                 children: [
-                  Image.asset('assets/images/Circle.png'),
-
+                  Container(
+                    height: 400,
+                    width: 500,
+                    alignment: Alignment.topCenter,
+                    padding: EdgeInsets.all(23),
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage("assets/images/Circle.png"),
+                          fit: BoxFit.cover),
+                      color: Colors.black,
+                    ),
+                  ),
                   // image 1
                   Positioned(
                       top: height * 0.07,
@@ -47,72 +59,101 @@ class _Screen1State extends State<Screen1> {
                 ],
               ),
             ),
-            Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-              Positioned(
-                top: height * 0.53,
-                left: width * 0.07,
-                child: Column(
-                    // mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text("Task Management",
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: Color(0xFF5945FB),
-                              fontWeight: FontWeight.w500)),
-                      Text("Let's create a",
-                          style: TextStyle(fontSize: 33, color: Colors.white)),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'space',
-                            style: TextStyle(
-                                fontSize: 35,
-                                fontWeight: FontWeight.w600,
-                                color: Color(0xFF5945FB)),
-                          ),
-                          SizedBox(width: width * 0.03),
-                          Text('for your',
-                              style: TextStyle(
-                                  fontSize: 33,
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.white)),
-                        ],
-                      ),
-                      Text('workflows.',
-                          style: TextStyle(
-                              fontSize: 33,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.white)),
-                    ]),
+            Row(
+              children: [
+                Padding(padding: EdgeInsets.only(left: 30)),
+                Text(
+                  "Task Management",
+                  style: TextStyle(
+                      fontSize: 23,
+                      color: Color(0xFF5945FB),
+                      fontWeight: FontWeight.w500),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Padding(padding: EdgeInsets.only(left: 30)),
+                Text(
+                  "Let's Create a",
+                  style: TextStyle(fontSize: 35, color: Colors.white),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Padding(padding: EdgeInsets.only(left: 30)),
+                Text(
+                  'space',
+                  style: TextStyle(
+                      fontSize: 35,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFF5945FB)),
+                ),
+                SizedBox(width: width * 0.03),
+                Text('for your',
+                    style: TextStyle(
+                        fontSize: 33,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.white)),
+              ],
+            ),
+            Row(
+              children: [
+                Padding(padding: EdgeInsets.only(left: 30)),
+                Text('workflows.',
+                    style: TextStyle(
+                        fontSize: 33,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.white)),
+              ],
+            ),
+            SizedBox(
+              height: 0,
+              child: PageView(
+                controller: controller,
+                children: const [],
               ),
-            ]),
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text(
-                    "Skip",
-                    style: TextStyle(fontSize: 20, color: Colors.white),
+            ),
+            Row(
+              children: [
+                Padding(padding: EdgeInsets.only(left: 30)),
+                SmoothPageIndicator(
+                  controller: controller,
+                  count: 3,
+                  effect: ExpandingDotsEffect(
+                    activeDotColor: Color(0xFF5945FB),
+                    dotColor: Color(0xFF5945FB),
+                    dotHeight: 20,
+                    dotWidth: 20,
                   ),
-                  Stack(
-                    children: [
-                      Image.asset("assets/images/Rectangle.png"),
-                      Positioned(
-                        left: width * 0.06,
-                        bottom: 25,
-                        child: IconButton(
-                          onPressed: () {
-                            Get.to(Screen2());
-                          },
-                          icon: Icon(Icons.arrow_forward_sharp,
-                              color: Colors.white),
-                        ),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text(
+                  "Skip",
+                  style: TextStyle(fontSize: 20, color: Colors.white),
+                ),
+                Stack(
+                  children: [
+                    Image.asset("assets/images/Rectangle.png"),
+                    Positioned(
+                      left: width * 0.06,
+                      bottom: 25,
+                      child: IconButton(
+                        onPressed: () {
+                          Get.to(Screen2());
+                        },
+                        icon: Icon(Icons.arrow_forward_sharp,
+                            color: Colors.white),
                       ),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ],
         ),
