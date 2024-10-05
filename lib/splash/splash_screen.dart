@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/OnBoardScreen/onboard_screen1.dart';
+import 'package:my_app/OnBoardScreen/onboarding_screens.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -61,7 +61,7 @@ class SplashScreen extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Screen1()));
+                                    builder: (context) => OnBoardScreen()));
                           },
                           child: Text(
                             "Get Started",
